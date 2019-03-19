@@ -1,0 +1,9 @@
+{
+  "servers": [
+    {
+      "name": "Wolfpack Emu",
+      "address": "127.0.0.1",
+      "port": 2593
+    }
+  ]
+}
