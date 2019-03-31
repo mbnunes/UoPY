@@ -1,10 +1,12 @@
 from network.UOPacket import UOPacket
+from misc.WPAccount import WPAccount
 
 class WPRx:
 
 
-    def __init__(self, conn):
+    def __init__(self, conn, transport):
         self.conn = conn
+        self.transport = transport
 
     def verifyPacket(self):
         self.request = self.conn
@@ -25,5 +27,5 @@ class WPRx:
     def package_0x80(self):
         login = UOPacket.getUTF8(self.request,1,30)
         password = UOPacket.getUTF8(self.request,31,30)
-        print(login)
-        print(password)
+        account = WPAccount(self.transport)
+        account.verifyAccount(login,password)

@@ -15,7 +15,7 @@ class WPServerProtocol(protocol.Protocol):
         print("Connections: {}".format(self.factory.numConnections))
 
     def dataReceived(self, data):
-        request = WPRx(data)
+        request = WPRx(data, self.transport)
         request.verifyPacket()
 
     def connectionLost(self, reason=None):
