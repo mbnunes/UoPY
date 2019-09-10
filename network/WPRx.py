@@ -10,11 +10,13 @@ class WPRx:
 
     def verifyPacket(self):
         self.request = self.conn
-
+        print(self.request)
         if self.request[0] == 239:
             self.package_0xEF()
         elif self.request[0] == 128:
             self.package_0x80()
+        elif self.request[0] == 160:
+            self.package_0xA0()
 
 
     def package_0xEF(self):
@@ -25,6 +27,12 @@ class WPRx:
         build = UOPacket.getInt32(self.request,17)
 
     def package_0x80(self):
+        login = UOPacket.getUTF8(self.request,1,30)
+        password = UOPacket.getUTF8(self.request,31,30)
+        account = WPAccount(self.transport)
+        account.verifyAccount(login,password)
+
+    def package_0xA0(self):
         login = UOPacket.getUTF8(self.request,1,30)
         password = UOPacket.getUTF8(self.request,31,30)
         account = WPAccount(self.transport)
