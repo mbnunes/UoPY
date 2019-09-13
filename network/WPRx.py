@@ -33,7 +33,7 @@ class WPRx:
         account.verifyAccount(login,password)
 
     def package_0xA0(self):
-        login = UOPacket.getUTF8(self.request,1,30)
-        password = UOPacket.getUTF8(self.request,31,30)
-        account = WPAccount(self.transport)
-        account.verifyAccount(login,password)
+        server = UOPacket.getInt16(self.request,1)
+        connected = server - 1
+        print("Account {} conecting on server.", "Teste")
+        WPAccount.sendConnectionConfirmation(connected)

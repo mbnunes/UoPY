@@ -1,10 +1,8 @@
 from config.wolfpack import WolfpackConfig
 from network.UOPacket import UOPacket
+
+
 class WRTx:
-
-    def __init__(self):
-        pass
-
 
     @staticmethod
     def package_0x80():
