@@ -3,8 +3,8 @@ from network.UOPacket import UOPacket
 class Packet_8C(UOPacket):
 
 
-    def __init__(self, client=None):
-        self.setPacket('\x8C')
+    def __init__(self, client=None, packet=None):
+        self.setPacket(b'\x8C')
 
         if client is not None:
             self.client = client
@@ -25,7 +25,7 @@ class Packet_8C(UOPacket):
         self.setInt8(0)
         self.setInt8(0)
 
-        self.client.write(self)
+        self.client.write(self.packetBytes)
 
     def setIp(self, ip):
         self.ip = ip.split(".")

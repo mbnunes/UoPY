@@ -1,8 +1,6 @@
 
 class WPCompression:
 
-
-
     @staticmethod
     def huffmanTable(self):
         return [(b'\x00\x02', b'\x00\x00'), (b'\x00\x05', b'\x00\x1f'), (b'\x00\x06', b'\x00"'),
@@ -73,7 +71,7 @@ class WPCompression:
                 (b'\x00\n', b'\x02:'), (b'\x00\n', b'\x01\xb8'), (b'\x00\x0b', b'\x03\xaf'), (b'\x00\n', b'\x01\x8e'),
                 (b'\x00\n', b'\x02\xec'), (b'\x00\x07', b'\x00b'), (b'\x00\x04', b'\x00\r')]
 
-
+    @staticmethod
     def compress(self,source):
         size = len(source)
         retval = bytearray()

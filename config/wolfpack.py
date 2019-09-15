@@ -11,3 +11,18 @@ class WolfpackConfig:
 
     def ReadServers(self):
         return self.data["servers"]
+
+    def FeaturesFlags(self,feature):
+        flags = self.data["features"][feature]
+
+        for i in flags:
+            feature |= flags[i]
+
+        return feature
+
+    def AccountOptions(self, option):
+        return self.data["account"][option]
+
+    def StartCitiesPositions(self):
+        return self.data["start_cities_locations"]
+

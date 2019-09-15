@@ -5,7 +5,7 @@ from network.UOPacket import UOPacket
 class WRTx:
 
     @staticmethod
-    def package_0x80():
+    def package_0xA8():
         wolfpack = WolfpackConfig()
         sizePackage = 0
 
