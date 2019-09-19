@@ -2,22 +2,22 @@
   "servers": [
     {
       "name": "Wolfpack Emu",
-      "address": "127...1",
+      "address": "127.0.0.1",
       "port": 2593
     }
   ],
   "features": [
     {
-      "featuret2a": [1, 2],
-      "featurelbr": [1, 2],
-      "featureaos": [1, 2, 4, 8],
-      "featurese": [1, 2],
-      "featureml": [1],
-      "featurekr": [1],
-      "featuresa": [1, 2],
-      "featuretol": [1],
-      "featureej": [1],
-      "featureextra": [1, 2, 4, 8, 1]
+      "featuret2a": [1, 2 ], 
+      "featurelbr": [1, 2 ], 
+      "featureaos": [1, 2, 4, 8 ], 
+      "featurese": [1, 2 ], 
+      "featureml": [1 ], 
+      "featurekr": [1 ], 
+      "featuresa": [1, 2 ], 
+      "featuretol": [1 ], 
+      "featureej": [1 ], 
+      "featureextra": [1, 2, 4,8,1 ]
     }
   ],
   "accounts": [
@@ -26,16 +26,14 @@
     }
   ],
   "start_cities_locations": [
-    {
-      "name":"Yew","area":"The Empath Abbey","position":{"x":633,"y":858,"z":0,"map":0},"cliloc":1075072,
-      "name":"Minoc","area":"The Barnacle Tavern","position":{"x":2476,"y":413,"z":15,"map":0},"cliloc":1075073,
-      "name":"Britain","area":"The Wayfarer's Inn","position":{"x":1602,"y":1591,"z":20,"map":0},"cliloc":1075074,
-      "name":"Moonglow","area":"The Scholars Inn","position":{"x":4408,"y":1168,"z":0,"map":0},"cliloc":1075075,
-      "name":"Trinsic","area":"The Traveller's Inn","position":{"x":1845,"y":2745,"z":0,"map":0},"cliloc":1075076,
-      "name":"New Haven","area":"New Haven Bank","position":{"x":3667,"y":2625,"z":0,"map":0},"cliloc":1150168,
-      "name":"Jhelom","area":"The Mercenary Inn","position":{"x":1374,"y":3826,"z":0,"map":0},"cliloc":1075078,
-      "name":"Skara Brae","area":"The Falconers Inn","position":{"x":618,"y":2234,"z":0,"map":0},"cliloc":1075079,
-      "name":"Vesper","area":"The Ironwood Inn","position":{"x":2771,"y":976,"z":0,"map":0},"cliloc":1075080
-    }
+    {"name": "Yew", "area": "The Empath Abbey", "position": {"x": 633, "y": 858, "z": 0, "map": 0 }, "cliloc": 1075072 }, 
+    {"name": "Minoc", "area": "The Barnacle Tavern", "position": {"x": 2476, "y": 413, "z": 15, "map": 0 }, "cliloc": 1075073 }, 
+    {"name": "Britain", "area": "The Wayfarer's Inn", "position": {"x": 1602, "y": 1591, "z": 20, "map": 0 }, "cliloc": 1075074 }, 
+    {"name": "Moonglow", "area": "The Scholars Inn", "position": {"x": 4408, "y": 1168, "z": 0, "map": 0 }, "cliloc": 1075075 }, 
+    {"name": "Trinsic", "area": "The Traveller's Inn", "position": {"x": 1845, "y": 2745, "z": 0, "map": 0 }, "cliloc": 1075076 }, 
+    {"name": "New Haven", "area": "New Haven Bank", "position": {"x": 3667, "y": 2625, "z": 0, "map": 0 } , "cliloc": 1150168},
+    { "name": "Jhelom", "area": "The Mercenary Inn", "position": {"x": 1374, "y": 3826, "z": 0, "map": 0 }, "cliloc": 1075078 }, 
+    {"name": "Skara Brae", "area": "The Falconers Inn", "position": {"x": 618, "y": 2234, "z": 0, "map": 0 }, "cliloc": 1075079 }, 
+    {"name": "Vesper", "area": "The Ironwood Inn", "position": {"x": 2771, "y": 976, "z": 0, "map": 0 }, "cliloc": 1075080 }
   ]
 }

@@ -1,14 +1,15 @@
 from network.UOPacket import UOPacket
 from config.wolfpack import WolfpackConfig
+from network.WPCompress import WPCompression
 
-class Packet_A8(UOPacket):
+class Packet_A9(UOPacket):
 
 
     def __init__(self, client=None, packet=None):
         self.wolfpack = WolfpackConfig()
 
         self.serverCount = len(self.wolfpack.ReadServers())
-        self.setPacket(b'\xa8')
+        self.setPacket(b'\xa9')
 
         self.sizePacket = 0
         self.charCount = 0
@@ -29,12 +30,14 @@ class Packet_A8(UOPacket):
 
         self.setInt8(self.charCount)
 
-        for i in range(self.charCount):
-            if i < len(self.chars):
+        i = 0
+        while i < self.charCount:
+            if i < self.chars:
                 self.setUTF8(self.chars[i]['name'], 30)
                 self.setUTF8("", 30)
             else:
                 self.setUTF8("", 60)
+            i += 1
 
         self.setInt8(self.citiesCount)
 
@@ -51,7 +54,10 @@ class Packet_A8(UOPacket):
         self.setInt32(self.flags)
         self.setInt16(self.lastCharLost)
 
-        self.client.write(self.packetBytes)
+        compressed = WPCompression()
+        testpacket = compressed.compress(self.packetBytes)
+
+        self.client.write(testpacket)
 
     def setSizePacket(self, sizePacket):
         self.sizePacket = sizePacket
@@ -60,7 +66,7 @@ class Packet_A8(UOPacket):
         self.charCount = charCount
 
     def setChars(self, chars):
-        self.chars = self, chars
+        self.chars = chars
 
     def setCitiesCount(self, citiesCount):
         self.citiesCount = citiesCount

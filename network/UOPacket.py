@@ -55,7 +55,7 @@ class UOPacket:
     def setUTF8(self, text, lenghtPacket):
         tmp = str.encode(text)
 
-        for i in range(lenghtPacket):
-            tmp += b""
+        for i in range(lenghtPacket-len(text)):
+            tmp += b'\x00'
 
         self.packetBytes += tmp

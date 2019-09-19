@@ -21,5 +21,6 @@ class Packet_91(UOPacket):
 
         account = WPAccount(self.client)
         account.enableLockedFeatures()
+        account.sendCharacterList()
 
 
