@@ -135,7 +135,7 @@ class WPAccount:
         start_location = self.wpConfig.StartCitiesPositions()
 
         newPacket = Packet_A9(self.client)
-        newPacket.setCharCount(7)
+        newPacket.setCharCount(5)
         newPacket.setChars(character)
         newPacket.setCitiesCount(len(start_location))
         newPacket.setCities(start_location)

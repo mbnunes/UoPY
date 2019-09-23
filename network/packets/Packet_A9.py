@@ -28,9 +28,11 @@ class Packet_A9(UOPacket):
         if self.client is None:
             return False
 
+        self.setInt16(0)
         self.setInt8(self.charCount)
 
         i = 0
+        print(self.chars)
         while i < self.charCount:
             if i < self.chars:
                 self.setUTF8(self.chars[i]['name'], 30)
@@ -49,18 +51,28 @@ class Packet_A9(UOPacket):
             self.setInt32(self.cities[i]["position"]["y"])
             self.setInt32(self.cities[i]["position"]["z"])
             self.setInt32(self.cities[i]["position"]["map"])
+            self.setInt32(self.cities[i]["cliloc"])
             self.setInt32(0)
 
         self.setInt32(self.flags)
         self.setInt16(self.lastCharLost)
+
+        self.packetBytes = self.getSizePacket(self.packetBytes)
 
         compressed = WPCompression()
         testpacket = compressed.compress(self.packetBytes)
 
         self.client.write(testpacket)
 
-    def setSizePacket(self, sizePacket):
-        self.sizePacket = sizePacket
+    def getSizePacket(self, packet):
+        originalPacket = len(packet)
+        packetId = packet[0]
+        packetCutted = packet[3:]
+        newPacket = packetId.to_bytes(1, "big")
+        newPacket += originalPacket.to_bytes(2, "big")
+        newPacket += packetCutted
+
+        return newPacket
     
     def setCharCount(self, charCount):
         self.charCount = charCount
