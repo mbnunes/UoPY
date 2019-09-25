@@ -1,4 +1,3 @@
-from network.UOPacket import UOPacket
 from network.packets.Packet_A0 import Packet_A0
 from network.packets.Packet_80 import Packet_80
 from network.packets.Packet_EF import Packet_EF

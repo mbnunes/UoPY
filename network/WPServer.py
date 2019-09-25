@@ -33,5 +33,6 @@ class WPServerFactory(Factory):
         return WPServerProtocol(self)
 
 
-reactor.listenTCP(wpConfig.ReadServers()[0]["port"], WPServerFactory())
-reactor.run()
+def runserver():
+    reactor.listenTCP(wpConfig.ReadServers()[0]["port"], WPServerFactory())
+    reactor.run()
