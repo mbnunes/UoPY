@@ -1,13 +1,13 @@
 from network.UOPacket import UOPacket
-from config.wolfpack import WolfpackConfig
+from config.uopy import UoPYConfig
 
 class Packet_A8(UOPacket):
 
 
     def __init__(self, client=None, packet=None):
-        self.wolfpack = WolfpackConfig()
+        self.UoPY = UoPYConfig()
         self.sizePackage = 0
-        self.serverCount = len(self.wolfpack.ReadServers())
+        self.serverCount = len(self.UoPY.ReadServers())
         self.setPacket(b'\xa8')
 
         if client is not None:
@@ -25,7 +25,7 @@ class Packet_A8(UOPacket):
 
         for i in range(self.serverCount):
             self.setInt16(i)
-            self.setUTF8(self.wolfpack.ReadServers()[i]["name"], 32)
+            self.setUTF8(self.UoPY.ReadServers()[i]["name"], 32)
             self.setInt8(0)
             self.setSInt8(0)
             self.setInt32(0)

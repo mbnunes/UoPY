@@ -53,7 +53,22 @@ class UOPacket:
         return str(packet[offset:offset+lenght],"utf-8").replace('\x00',"")
 
     def setUTF8(self, text, lenghtPacket):
-        tmp = str.encode(text)
+        tmp = (text).encode("utf-8")
+        size = 0
+
+        if text == "":
+            size = lenghtPacket
+        else:
+            size = lenghtPacket-len(text)
+
+        for i in range(size):
+            tmp += b'\x00'
+
+        self.packetBytes += tmp
+
+    def setASCII(self, text, lenghtPacket):
+        tmp = (text).encode("ascii")
+        print(tmp)
         size = 0
 
         if text == "":

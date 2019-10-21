@@ -1,9 +1,9 @@
 from twisted.internet.protocol import Factory
 from twisted.internet import reactor, protocol
 from network.WPRx import *
-from config.wolfpack import WolfpackConfig
+from config.uopy import UoPYConfig
 
-wpConfig = WolfpackConfig()
+wpConfig = UoPYConfig()
 
 class WPServerProtocol(protocol.Protocol):
 
@@ -26,7 +26,7 @@ class WPServerFactory(Factory):
     numConnections = 0
 
     def __init__(self):
-        print("Wolfpack Emu v0.0.1a")
+        print("UoPY Emu v0.0.1a")
         print("PORT: {}".format(wpConfig.ReadServers()[0]["port"]))
 
     def buildProtocol(self, addr):

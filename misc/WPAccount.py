@@ -2,7 +2,7 @@ from network.packets.Packet_8C import Packet_8C
 from network.packets.Packet_A8 import Packet_A8
 from network.packets.Packet_A9 import Packet_A9
 from network.packets.Packet_B9 import Packet_B9
-from config.wolfpack import WolfpackConfig
+from config.uopy import UoPYConfig
 
 class WPAccount:
 
@@ -10,7 +10,7 @@ class WPAccount:
         self.client = transport
         self.featuresFlags = 0
         self.charListFlags = 0
-        self.wpConfig = WolfpackConfig()
+        self.wpConfig = UoPYConfig()
 
         self.updateCharListFlags()
         self.updateFeaturesFlags()
@@ -135,10 +135,10 @@ class WPAccount:
         start_location = self.wpConfig.StartCitiesPositions()
 
         newPacket = Packet_A9(self.client)
-        newPacket.setCharCount(5)
+        newPacket.setCharCount(7)
         newPacket.setChars(character)
         newPacket.setCitiesCount(len(start_location))
         newPacket.setCities(start_location)
-        newPacket.setFlags(self.charListFlags)
+        newPacket.setFlags(1408)
         newPacket.setLastCharLost(0)
         newPacket.sendPacket()

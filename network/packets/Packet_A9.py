@@ -1,14 +1,14 @@
 from network.UOPacket import UOPacket
-from config.wolfpack import WolfpackConfig
+from config.uopy import UoPYConfig
 from network.WPCompress import WPCompression
 
 class Packet_A9(UOPacket):
 
 
     def __init__(self, client=None, packet=None):
-        self.wolfpack = WolfpackConfig()
+        self.UoPY = UoPYConfig()
 
-        self.serverCount = len(self.wolfpack.ReadServers())
+        self.serverCount = len(self.UoPY.ReadServers())
         self.setPacket(b'\xa9')
 
         self.sizePacket = 0

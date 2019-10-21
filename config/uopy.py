@@ -2,10 +2,10 @@ import json
 import pprint
 import os
 
-class WolfpackConfig:
+class UoPYConfig:
 
     def __init__(self):
-        self.pathFile = os.path.dirname(os.path.abspath(__file__))+"/wolfpack.json"
+        self.pathFile = os.path.dirname(os.path.abspath(__file__))+"/uopy.json"
         with open(self.pathFile, "r") as wpconfig:
             self.data = json.load(wpconfig)
 
