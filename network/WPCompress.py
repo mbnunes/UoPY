@@ -35,8 +35,8 @@ class WPCompression:
         retval = []
         current = cBits = 0
 
-        for m in range(len(source)):
-            nrBits = self.huffmanTable[source[m]][0]-1
+        for m in range(size):
+            nrBits = self.huffmanTable[source[m]][0] - 1
             val = self.huffmanTable[source[m]][1]
 
             n = nrBits
@@ -50,8 +50,7 @@ class WPCompression:
                     cBits = 0
                 n -= 1
 
-
-        nrBits = self.huffmanTable[256][0]-1
+        nrBits = self.huffmanTable[256][0] - 1
         val = self.huffmanTable[256][1]
 
         w = nrBits
@@ -83,20 +82,25 @@ class WPCompression:
         return packetReturn
 
     def decompress(self,source):
+
         m_tree = self.createTree()
 
-        retval = bytearray()
+        print("Decompress")
+        retval = []
         current = val = 0
         size = len(source)
         currentNode = m_tree
         packetReturn = b''
 
-        for i in range(0,size):
+        i = 0
+        print("Primeiro While")
+        while i < size:
             current = source[i]
 
             n = 7
             while n >= 0:
                 x = (current >> n) % 2
+                print("Segundo While {}".format(n))
                 if 0 == x:
                     currentNode = currentNode.right
                 else:
@@ -108,7 +112,7 @@ class WPCompression:
 
                 if 256 == val:
                     for packet in retval:
-                        packetReturn += packet
+                        packetReturn += packet.to_bytes(1, "big")
 
                     return packetReturn
 
@@ -118,9 +122,14 @@ class WPCompression:
                 retval.append(val)
 
                 n -= 1
+            i += 1
 
+        print("Terceiro For")
         for packet in retval:
-            packetReturn += packet
+            packetReturn += packet.to_bytes(1, "big")
+
+
+        print(packetReturn)
 
         return packetReturn
 
@@ -133,8 +142,8 @@ class WPCompression:
         while i < 257:
             current = mTree
 
-            nrBits = int.from_bytes(self.huffmanTable[i][0], "big") - 1
-            val = int.from_bytes(self.huffmanTable[i][0], "big")
+            nrBits = self.huffmanTable[i][0] - 1
+            val = self.huffmanTable[i][1]
 
             n = nrBits
             while n >= 0:
