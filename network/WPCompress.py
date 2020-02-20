@@ -29,13 +29,13 @@ class WPCompression:
                             (10,926),(10,591),(11,883),(10,585),(11,882),(9,359),(10,528),(10,570),(10,440),
                             (11,943),(10,398),(10,748),(7,98),(4,13)]
 
-
     def compress(self, source):
         size = len(source)
         retval = []
         current = cBits = 0
 
-        for m in range(size):
+        m = 0
+        while m < size:
             nrBits = self.huffmanTable[source[m]][0] - 1
             val = self.huffmanTable[source[m]][1]
 
@@ -49,6 +49,7 @@ class WPCompression:
                     retval.append(current & 0xFF)
                     cBits = 0
                 n -= 1
+            m += 1
 
         nrBits = self.huffmanTable[256][0] - 1
         val = self.huffmanTable[256][1]
@@ -79,13 +80,14 @@ class WPCompression:
         for i in range(len(retval)):
             packetReturn += retval[i].to_bytes(1, "big")
 
+        print(len(packetReturn))
+        print(packetReturn)
         return packetReturn
 
     def decompress(self,source):
 
         m_tree = self.createTree()
 
-        print("Decompress")
         retval = []
         current = val = 0
         size = len(source)
@@ -93,14 +95,12 @@ class WPCompression:
         packetReturn = b''
 
         i = 0
-        print("Primeiro While")
         while i < size:
             current = source[i]
 
             n = 7
             while n >= 0:
                 x = (current >> n) % 2
-                print("Segundo While {}".format(n))
                 if 0 == x:
                     currentNode = currentNode.right
                 else:
@@ -124,7 +124,6 @@ class WPCompression:
                 n -= 1
             i += 1
 
-        print("Terceiro For")
         for packet in retval:
             packetReturn += packet.to_bytes(1, "big")
 

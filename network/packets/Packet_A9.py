@@ -61,7 +61,6 @@ class Packet_A9(UOPacket):
 
         compressed = WPCompression()
         testpacket = compressed.compress(self.packetBytes)
-        compressed.decompress(testpacket)
 
         self.client.write(testpacket)
 

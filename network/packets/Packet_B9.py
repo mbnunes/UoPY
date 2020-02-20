@@ -1,4 +1,5 @@
 from network.UOPacket import UOPacket
+from network.WPCompress import WPCompression
 
 class Packet_B9(UOPacket):
 
@@ -17,8 +18,11 @@ class Packet_B9(UOPacket):
             return False
 
         self.setInt32(self.flags)
-
-        self.client.write(self.packetBytes)
+        print("Send: ", self.packetBytes)
+        print("Size: ", len(self.packetBytes))
+        compressed = WPCompression()
+        packetCompressed = compressed.compress(self.packetBytes)
+        self.client.write(packetCompressed)
 
     def setFlags(self, flags):
         self.flags = flags
