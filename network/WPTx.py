@@ -1,4 +1,4 @@
-from config.UoPY import UoPYConfig
+from config.uopy import UoPYConfig
 from network.UOPacket import UOPacket
 
 

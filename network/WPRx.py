@@ -1,8 +1,4 @@
-from network.packets.Packet_A0 import Packet_A0
-from network.packets.Packet_80 import Packet_80
-from network.packets.Packet_EF import Packet_EF
-from network.packets.Packet_91 import Packet_91
-from network.packets.Packet_F8 import Packet_F8
+from network.packets.PyUO_Rx import *
 
 from misc.WPAccount import WPAccount
 

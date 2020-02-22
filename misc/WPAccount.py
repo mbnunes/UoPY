@@ -1,7 +1,4 @@
-from network.packets.Packet_8C import Packet_8C
-from network.packets.Packet_A8 import Packet_A8
-from network.packets.Packet_A9 import Packet_A9
-from network.packets.Packet_B9 import Packet_B9
+from network.packets.PyUO_Tx import *
 from config.uopy import UoPYConfig
 
 class WPAccount:
