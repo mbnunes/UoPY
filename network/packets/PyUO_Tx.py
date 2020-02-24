@@ -101,7 +101,6 @@ class Packet_A9(UOPacket):
         self.setInt8(self.charCount)
 
         i = 0
-        print(self.chars)
         while i < self.charCount:
             if i < self.chars:
                 self.setUTF8(self.chars[i]['name'], 30)
@@ -178,8 +177,6 @@ class Packet_B9(UOPacket):
             return False
 
         self.setInt32(self.flags)
-        print("Send: ", self.packetBytes)
-        print("Size: ", len(self.packetBytes))
         compressed = WPCompression()
         packetCompressed = compressed.compress(self.packetBytes)
         self.client.write(packetCompressed)

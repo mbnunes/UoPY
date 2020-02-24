@@ -1,5 +1,6 @@
 from network.UOPacket import UOPacket
 from misc.WPAccount import WPAccount
+from misc.db import PyUODB
 
 class Packet_80(UOPacket):
 
@@ -85,8 +86,6 @@ class Packet_EF(UOPacket):
         revision = self.getInt32(self.packet, 13)
         build = self.getInt32(self.packet, 17)
 
-from network.UOPacket import UOPacket
-
 class Packet_F8(UOPacket):
 
     def __init__(self, client=None, packet=None):
@@ -104,7 +103,7 @@ class Packet_F8(UOPacket):
         self.clientLoginCount = None
         self.profession = None
         self.arg6 = None # array 15 bytes
-        self.ganderRacer = None
+        self.genderRace = None
         self.str = None
         self.dex = None
         self.int = None
@@ -126,6 +125,8 @@ class Packet_F8(UOPacket):
         self.clientIP = None
         self.shirtColor = None
         self.pantsColor = None
+        self.condb = PyUODB()
+        self.colPlayers = self.condb.db["players"]
 
 
     def receivePacket(self):
@@ -136,64 +137,56 @@ class Packet_F8(UOPacket):
         self.arg1 = self.getInt32(self.packet, 1)
         self.arg2 = self.getInt32(self.packet, 5)
         self.arg3 = self.getInt8(self.packet, 9)
-        self.charName = self.getUTF8(self.packet, 10, 29)
-        self.arg4 = self.getInt8(self.packet, 40)
-        self.flags = self.getInt32(self.packet, 41)
-        self.arg5 = self.getInt32(self.packet, 45)
-        self.clientLoginCount = self.getInt32(self.packet, 49)
-        self.profession = self.getInt8(self.packet, 53)
-        self.arg6 = self.getUTF8(self.packet, 54, 15)
-        self.ganderRacer = self.getInt8(self.packet, 69)
-        self.str = self.getInt8(self.packet, 70)
-        self.dex = self.getInt8(self.packet, 71)
-        self.int = self.getInt8(self.packet, 72)
-        self.skill1 = self.getInt8(self.packet, 73)
-        self.skillAmount1 = self.getInt8(self.packet, 74)
-        self.skill2 = self.getInt8(self.packet, 75)
-        self.skillAmount2 = self.getInt8(self.packet, 76)
-        self.skill3 = self.getInt8(self.packet, 77)
-        self.skillAmount3 = self.getInt8(self.packet, 78)
-        self.skill4 = self.getInt8(self.packet, 79)
-        self.skillAmount4 = self.getInt8(self.packet, 80)
-        self.skinColor = self.getInt16(self.packet, 81)
-        self.hairStyle = self.getInt16(self.packet, 83)
-        self.hairColor = self.getInt16(self.packet, 85)
-        self.beardStyle = self.getInt16(self.packet, 87)
-        self.beardColor = self.getInt16(self.packet, 89)
-        self.shardIndex = self.getInt8(self.packet, 91)
-        self.startingCity = self.getInt8(self.packet, 92)
-        self.characterSlot = self.getInt32(self.packet, 93)
-        self.clientIP = self.getIPAddress(self.packet, 97)
-        self.shirtColor = self.getInt16(self.packet, 101)
-        self.pantsColor = self.getInt16(self.packet, 103)
+        self.charName = self.getUTF8(self.packet, 10, 30)
+        self.arg4 = self.getInt16(self.packet, 40)
+        self.flags = self.getInt32(self.packet, 42)
+        self.arg5 = self.getInt32(self.packet, 46)
+        self.clientLoginCount = self.getInt32(self.packet, 50)
+        self.profession = self.getInt8(self.packet, 54)
+        self.arg6 = self.getUTF8(self.packet, 55, 15)
+        self.genderRace = self.getInt8(self.packet, 70)
+        self.str = self.getInt8(self.packet, 71)
+        self.dex = self.getInt8(self.packet, 72)
+        self.int = self.getInt8(self.packet, 73)
+        self.skill1 = self.getInt8(self.packet, 74)
+        self.skillAmount1 = self.getInt8(self.packet, 75)
+        self.skill2 = self.getInt8(self.packet, 76)
+        self.skillAmount2 = self.getInt8(self.packet, 77)
+        self.skill3 = self.getInt8(self.packet, 78)
+        self.skillAmount3 = self.getInt8(self.packet, 79)
+        self.skill4 = self.getInt8(self.packet, 80)
+        self.skillAmount4 = self.getInt8(self.packet, 81)
+        self.skinColor = self.getInt16(self.packet, 82)
+        self.hairStyle = self.getInt16(self.packet, 84)
+        self.hairColor = self.getInt16(self.packet, 86)
+        self.beardStyle = self.getInt16(self.packet, 88)
+        self.beardColor = self.getInt16(self.packet, 90)
+        self.shardIndex = self.getInt8(self.packet, 92)
+        self.startingCity = self.getInt8(self.packet, 93)
+        self.characterSlot = self.getInt32(self.packet, 94)
+        self.clientIP = self.getIPAddress(self.packet, 98)
+        self.shirtColor = self.getInt16(self.packet, 102)
+        self.pantsColor = self.getInt16(self.packet, 104)
 
         self.createCharacter()
 
     def createCharacter(self):
-        print(self.charName)
-        print(self.flags)
-        print(self.clientLoginCount)
-        print(self.profession)
-        print(self.ganderRacer)
-        print(self.str)
-        print(self.dex)
-        print(self.int)
-        print(self.skill1)
-        print(self.skillAmount1)
-        print(self.skill2)
-        print(self.skillAmount2)
-        print(self.skill3)
-        print(self.skillAmount3)
-        print(self.skill4)
-        print(self.skillAmount4)
-        print(self.skinColor)
-        print(self.hairStyle)
-        print(self.hairColor)
-        print(self.beardStyle)
-        print(self.beardColor)
-        print(self.shardIndex)
-        print(self.startingCity)
-        print(self.characterSlot)
-        print(self.clientIP)
-        print(self.shirtColor)
-        print(self.pantsColor)
+
+        createCharJson = {"charName": self.charName, "flags": self.flags, \
+                          "clientLoginCount": self.clientLoginCount, "profession": self.profession, \
+                          "genderRace": self.genderRace, "str": self.str, \
+                          "dex": self.dex, "int": self.int, \
+                          "skill1": self.skill1, "skillAmount1": self.skillAmount1, \
+                          "skill2": self.skill2, "skillAmount2": self.skillAmount2, \
+                          "skill3": self.skill3, "skillAmount3": self.skillAmount3, \
+                          "skill4": self.skill4, "skillAmount4": self.skillAmount4, \
+                          "skinColor": self.skinColor, "hairStyle": self.hairStyle, \
+                          "hairColor": self.hairColor, "beardStyle": self.beardStyle, \
+                          "beardColor": self.beardColor, "shardIndex": self.shardIndex, \
+                          "startCity": self.startingCity, "characterSlot": self.characterSlot, \
+                          "clientIP": self.clientIP, "shirtColor": self.shirtColor, \
+                          "pantsColor": self.pantsColor }
+        try:
+            self.colPlayers.insert_one(createCharJson)
+        except:
+            print("O Cliente: %s - Erro ao tentar criar o char no MongoDB", self.client)

@@ -38,7 +38,11 @@ class UOPacket:
         self.packetBytes += number.to_bytes(2, "big")
 
     def getInt8(self, packet, offset):
-        return int.from_bytes(bytes(packet[offset]),"big")
+
+        if type(packet[offset]) == int:
+            return packet[offset]
+
+        return int.from_bytes(packet[offset],"big")
 
     def setInt8(self, number):
         self.packetBytes += number.to_bytes(1, "big")

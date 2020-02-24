@@ -1,5 +1,7 @@
 from network.packets.PyUO_Tx import *
 from config.uopy import UoPYConfig
+from misc.db import PyUODB
+from hashlib import md5
 
 class WPAccount:
 
@@ -13,8 +15,11 @@ class WPAccount:
         self.updateFeaturesFlags()
 
     def verifyAccount(self, login, password):
+        self.condb = PyUODB()
+        self.colAcc = self.condb.db["accounts"]
+        self.hashPass = md5(password.encode()).hexdigest()
 
-        if login == "test" and password == "test":
+        if self.colAcc.find({"account": login, "password": self.hashPass}).count() > 0:
             loginCheck = Packet_A8(self.client)
             loginCheck.sendPacket()
         else:
@@ -139,3 +144,5 @@ class WPAccount:
         newPacket.setFlags(1408)
         newPacket.setLastCharLost(0)
         newPacket.sendPacket()
+
+

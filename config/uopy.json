@@ -1,9 +1,23 @@
 {
+  "settings": [
+    {
+      "debug": true
+    }
+  ],
   "servers": [
     {
       "name": "UoPY Emu",
       "address": "127.0.0.1",
       "port": 2593
+    }
+  ],
+  "mongodb": [
+    {
+      "host": "localhost",
+      "port": 27017,
+      "database": "pyuo",
+      "db_user": "",
+      "db_pass": ""
     }
   ],
   "features": [

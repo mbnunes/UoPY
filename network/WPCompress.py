@@ -80,8 +80,6 @@ class WPCompression:
         for i in range(len(retval)):
             packetReturn += retval[i].to_bytes(1, "big")
 
-        print(len(packetReturn))
-        print(packetReturn)
         return packetReturn
 
     def decompress(self,source):
