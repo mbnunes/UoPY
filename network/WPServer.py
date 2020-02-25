@@ -2,6 +2,7 @@ from twisted.internet.protocol import Factory
 from twisted.internet import reactor, protocol
 from network.WPRx import *
 from config.uopy import UoPYConfig
+import globals
 
 wpConfig = UoPYConfig()
 
@@ -12,7 +13,8 @@ class WPServerProtocol(protocol.Protocol):
 
     def connectionMade(self):
         self.factory.numConnections += 1
-        print("Connections: {}".format(self.factory.numConnections))
+        if globals.DEBUG:
+            print("Connections: {}".format(self.factory.numConnections))
 
     def dataReceived(self, data):
         request = WPRx(data, self.transport)
@@ -20,7 +22,8 @@ class WPServerProtocol(protocol.Protocol):
 
     def connectionLost(self, reason=None):
         self.factory.numConnections -= 1
-        print("Connections: {}".format(self.factory.numConnections))
+        if globals.DEBUG:
+            print("Connections: {}".format(self.factory.numConnections))
 
 class WPServerFactory(Factory):
     numConnections = 0

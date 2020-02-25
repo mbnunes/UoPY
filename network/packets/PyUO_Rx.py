@@ -1,6 +1,7 @@
 from network.UOPacket import UOPacket
 from misc.WPAccount import WPAccount
 from misc.db import PyUODB
+import globals
 
 class Packet_80(UOPacket):
 
@@ -34,6 +35,8 @@ class Packet_91(UOPacket):
         if client is not None:
             self.client = client
 
+        globals.clientList[self.client] = {}
+
     def receivePacket(self):
 
         if self.client is None:
@@ -46,6 +49,7 @@ class Packet_91(UOPacket):
         account = WPAccount(self.client)
         account.enableLockedFeatures()
         account.sendCharacterList()
+        globals.clientList[self.client].update({"account": account})
 
 class Packet_A0(UOPacket):
 

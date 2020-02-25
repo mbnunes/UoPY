@@ -16,7 +16,7 @@ class UoPYConfig:
         return self.data["mongodb"][0]
 
     def Debug(self):
-        return self.data["settings"][0]['debug']
+        return self.data["settings"][0]["debug"]
 
     def FeaturesFlags(self, feature):
         flags = self.data["features"][0][feature]

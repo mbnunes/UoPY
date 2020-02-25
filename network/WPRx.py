@@ -1,6 +1,7 @@
 from network.packets.PyUO_Rx import *
 
 from misc.WPAccount import WPAccount
+import globals
 
 class WPRx:
 
@@ -9,9 +10,11 @@ class WPRx:
         self.conn = conn
         self.transport = transport
 
+
     def verifyPacket(self):
         self.request = self.conn
-        print("Received: %s\nSize: %d\nID: %d"%(self.request,len(self.request),self.request[0]))
+        if globals.DEBUG:
+            print("Received: %s\nSize: %d\nID: %d"%(self.request,len(self.request),self.request[0]))
         if self.request[0] == 239:
             pacote = Packet_EF(self.transport, self.request)
             pacote.receivePacket()
