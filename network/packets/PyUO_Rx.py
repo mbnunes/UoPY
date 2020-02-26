@@ -50,6 +50,7 @@ class Packet_91(UOPacket):
         account.enableLockedFeatures()
         account.sendCharacterList()
         globals.clientList[self.client].update({"account": account})
+        globals.clientList[self.client].update({"account_id": account.getId()})
 
 class Packet_A0(UOPacket):
 
@@ -189,7 +190,7 @@ class Packet_F8(UOPacket):
                           "beardColor": self.beardColor, "shardIndex": self.shardIndex, \
                           "startCity": self.startingCity, "characterSlot": self.characterSlot, \
                           "clientIP": self.clientIP, "shirtColor": self.shirtColor, \
-                          "pantsColor": self.pantsColor }
+                          "pantsColor": self.pantsColor, 'account_id': globals.clientList[self.client]['account_id']    }
         try:
             self.colPlayers.insert_one(createCharJson)
         except:

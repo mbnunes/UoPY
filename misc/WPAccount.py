@@ -10,6 +10,7 @@ class WPAccount:
         self.featuresFlags = 0
         self.charListFlags = 0
         self.wpConfig = UoPYConfig()
+        self.client_id = None
 
         self.updateCharListFlags()
         self.updateFeaturesFlags()
@@ -20,10 +21,14 @@ class WPAccount:
         self.hashPass = md5(password.encode()).hexdigest()
 
         if self.colAcc.find({"account": login, "password": self.hashPass}).count() > 0:
+            self.client_id = self.colAcc.find_one({"account": login, "password": self.hashPass})['_id']
             loginCheck = Packet_A8(self.client)
             loginCheck.sendPacket()
         else:
             print("Login Incorreto!")
+
+    def getId(self):
+        return self.client_id
 
     def sendConnectionConfirmation(self, server):
         packet = Packet_8C(self.client)
