@@ -1,0 +1,4 @@
+# connect mongo cli and paste this lines
+
+use pyuo
+db.accounts.insert({"$_id":{"$oid":"590fda01cb874ac34b7fb015"},"serial":1,"account":"test","password":"098f6bcd4621d373cade4e832627b4f6","maxChars":5,"creationDate":"2017-08-16 02:41:25","lastLogin":false,"plevel":7,"status":1,"clientVersion":null})

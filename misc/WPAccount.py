@@ -19,8 +19,9 @@ class WPAccount:
         self.condb = PyUODB()
         self.colAcc = self.condb.db["accounts"]
         self.hashPass = md5(password.encode()).hexdigest()
+        print(self.hashPass)
 
-        if self.colAcc.find({"account": login, "password": self.hashPass}).count() > 0:
+        if self.colAcc.count_documents({"account": login, "password": self.hashPass}) != 0:
             self.client_id = self.colAcc.find_one({"account": login, "password": self.hashPass})['_id']
             loginCheck = Packet_A8(self.client)
             loginCheck.sendPacket()
