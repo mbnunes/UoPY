@@ -2,6 +2,7 @@ from network.packets.PyUO_Tx import *
 from config.uopy import UoPYConfig
 from misc.db import PyUODB
 from hashlib import md5
+import globals
 
 class WPAccount:
 
@@ -19,17 +20,18 @@ class WPAccount:
         self.condb = PyUODB()
         self.colAcc = self.condb.db["accounts"]
         self.hashPass = md5(password.encode()).hexdigest()
-        print(self.hashPass)
 
         if self.colAcc.count_documents({"account": login, "password": self.hashPass}) != 0:
-            self.client_id = self.colAcc.find_one({"account": login, "password": self.hashPass})['_id']
+            globals.clientList[self.client] = {}
+            globals.clientList[self.client].update({"account_id": self.colAcc.find_one({"account": login, "password": self.hashPass})['_id']})
+            globals.clientList[self.client].update({"account_serial": self.colAcc.find_one({"account": login, "password": self.hashPass})['serial']})
             loginCheck = Packet_A8(self.client)
             loginCheck.sendPacket()
         else:
             print("Login Incorreto!")
 
-    def getId(self):
-        return self.client_id
+    def getAccountSerial(self):
+        return globals.clientList[self.client]
 
     def sendConnectionConfirmation(self, server):
         packet = Packet_8C(self.client)

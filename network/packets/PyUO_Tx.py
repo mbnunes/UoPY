@@ -64,13 +64,13 @@ class Packet_A8(UOPacket):
             self.setSInt8(0)
             self.setInt32(0)
 
-        tmpByte = len(self.packetBytes).to_bytes(2,"big")
-        tmpList = list(self.packetBytes)
+        self.tmpByte = len(self.packetBytes).to_bytes(2,"big")
+        self.tmpList = list(self.packetBytes)
 
-        tmpList[1] = tmpByte[0]
-        tmpList[2] = tmpByte[1]
+        self.tmpList[1] = self.tmpByte[0]
+        self.tmpList[2] = self.tmpByte[1]
 
-        self.client.write(bytes(tmpList))
+        self.client.write(bytes(self.tmpList))
 
 
 class Packet_A9(UOPacket):
@@ -127,20 +127,20 @@ class Packet_A9(UOPacket):
 
         self.packetBytes = self.getSizePacket(self.packetBytes)
 
-        compressed = WPCompression()
-        testpacket = compressed.compress(self.packetBytes)
+        self.compressed = WPCompression()
+        self.testpacket = self.compressed.compress(self.packetBytes)
 
-        self.client.write(testpacket)
+        self.client.write(self.testpacket)
 
     def getSizePacket(self, packet):
-        originalPacket = len(packet)
-        packetId = packet[0]
-        packetCutted = packet[3:]
-        newPacket = packetId.to_bytes(1, "big")
-        newPacket += originalPacket.to_bytes(2, "big")
-        newPacket += packetCutted
+        self.originalPacket = len(packet)
+        self.packetId = packet[0]
+        self.packetCutted = packet[3:]
+        self.newPacket = self.packetId.to_bytes(1, "big")
+        self.newPacket += self.originalPacket.to_bytes(2, "big")
+        self.newPacket += self.packetCutted
 
-        return newPacket
+        return self.newPacket
 
     def setCharCount(self, charCount):
         self.charCount = charCount
@@ -177,9 +177,9 @@ class Packet_B9(UOPacket):
             return False
 
         self.setInt32(self.flags)
-        compressed = WPCompression()
-        packetCompressed = compressed.compress(self.packetBytes)
-        self.client.write(packetCompressed)
+        self.compressed = WPCompression()
+        self.packetCompressed = self.compressed.compress(self.packetBytes)
+        self.client.write(self.packetCompressed)
 
     def setFlags(self, flags):
         self.flags = flags

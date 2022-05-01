@@ -50,7 +50,6 @@ class Packet_91(UOPacket):
         account.enableLockedFeatures()
         account.sendCharacterList()
         globals.clientList[self.client].update({"account": account})
-        globals.clientList[self.client].update({"account_id": account.getId()})
 
 class Packet_A0(UOPacket):
 
@@ -177,21 +176,25 @@ class Packet_F8(UOPacket):
 
     def createCharacter(self):
 
-        createCharJson = {"charName": self.charName, "flags": self.flags, \
-                          "clientLoginCount": self.clientLoginCount, "profession": self.profession, \
-                          "genderRace": self.genderRace, "str": self.str, \
-                          "dex": self.dex, "int": self.int, \
-                          "skill1": self.skill1, "skillAmount1": self.skillAmount1, \
-                          "skill2": self.skill2, "skillAmount2": self.skillAmount2, \
-                          "skill3": self.skill3, "skillAmount3": self.skillAmount3, \
-                          "skill4": self.skill4, "skillAmount4": self.skillAmount4, \
-                          "skinColor": self.skinColor, "hairStyle": self.hairStyle, \
-                          "hairColor": self.hairColor, "beardStyle": self.beardStyle, \
-                          "beardColor": self.beardColor, "shardIndex": self.shardIndex, \
-                          "startCity": self.startingCity, "characterSlot": self.characterSlot, \
-                          "clientIP": self.clientIP, "shirtColor": self.shirtColor, \
-                          "pantsColor": self.pantsColor, 'account_id': globals.clientList[self.client]['account_id']    }
-        try:
-            self.colPlayers.insert_one(createCharJson)
-        except:
-            print("O Cliente: %s - Erro ao tentar criar o char no MongoDB", self.client)
+        if not self.colAcc.find_one({"charName": self.charName})['charName']:
+            createCharJson = {"charName": self.charName, "flags": self.flags, \
+                            "clientLoginCount": self.clientLoginCount, "profession": self.profession, \
+                            "genderRace": self.genderRace, "str": self.str, \
+                            "dex": self.dex, "int": self.int, \
+                            "skill1": self.skill1, "skillAmount1": self.skillAmount1, \
+                            "skill2": self.skill2, "skillAmount2": self.skillAmount2, \
+                            "skill3": self.skill3, "skillAmount3": self.skillAmount3, \
+                            "skill4": self.skill4, "skillAmount4": self.skillAmount4, \
+                            "skinColor": self.skinColor, "hairStyle": self.hairStyle, \
+                            "hairColor": self.hairColor, "beardStyle": self.beardStyle, \
+                            "beardColor": self.beardColor, "shardIndex": self.shardIndex, \
+                            "startCity": self.startingCity, "characterSlot": self.characterSlot, \
+                            "clientIP": self.clientIP, "shirtColor": self.shirtColor, \
+                            "pantsColor": self.pantsColor, 'account_id': globals.clientList[self.client]['account_id']    }
+            try:
+                self.colPlayers.insert_one(createCharJson)
+            except:
+                print("O Cliente: %s - Erro ao tentar criar o char no MongoDB", self.client)
+        
+        else:
+            print("Nome já escolhido")
