@@ -1,9 +1,9 @@
 from network.packets.PyUO_Rx import *
 
-from misc.WPAccount import WPAccount
+from misc.UOAccount import UOAccount
 import globals
 
-class WPRx:
+class UOPacketRx:
 
 
     def __init__(self, conn, transport):
@@ -15,8 +15,8 @@ class WPRx:
         self.request = self.conn
         if globals.DEBUG:
             print("Received: %s\nSize: %d\nID: %d"%(self.request,len(self.request),self.request[0]))
-        if self.request[0] == 239:
-            pacote = Packet_EF(self.transport, self.request)
+        if self.request[0] == 239:            
+            pacote = Packet_EF(self.transport, self.request)            
             pacote.receivePacket()
         elif self.request[0] == 128:
             pacote = Packet_80(self.transport, self.request)

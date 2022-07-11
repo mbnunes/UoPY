@@ -4,7 +4,7 @@ from misc.db import PyUODB
 from hashlib import md5
 import globals
 
-class WPAccount:
+class UOAccount:
 
     def __init__(self,transport):
         self.client = transport
@@ -154,3 +154,6 @@ class WPAccount:
         newPacket.sendPacket()
 
 
+    def createNewChar(self, newChar):
+        self.newChar = newChar
+        print(self.newChar)

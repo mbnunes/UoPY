@@ -1,6 +1,6 @@
 import os, globals
 import sys
-from network.WPServer import *
+from network.UOServer import *
 
 globals.initialize()
 file_dir = os.path.dirname(__file__)

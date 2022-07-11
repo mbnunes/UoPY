@@ -1,7 +1,7 @@
 {
   "settings": [
     {
-      "debug": false
+      "debug": true
     }
   ],
   "servers": [

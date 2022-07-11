@@ -1,12 +1,12 @@
 from twisted.internet.protocol import Factory
 from twisted.internet import reactor, protocol
-from network.WPRx import *
+from network.UOPacketRx import *
 from config.uopy import UoPYConfig
 import globals
 
-wpConfig = UoPYConfig()
+uoConfig = UoPYConfig()
 
-class WPServerProtocol(protocol.Protocol):
+class UOServerProtocol(protocol.Protocol):
 
     def __init__(self, factory):
         self.factory = factory
@@ -17,7 +17,7 @@ class WPServerProtocol(protocol.Protocol):
             print("Connections: {}".format(self.factory.numConnections))
 
     def dataReceived(self, data):
-        request = WPRx(data, self.transport)
+        request = UOPacketRx(data, self.transport)
         request.verifyPacket()
 
     def connectionLost(self, reason=None):
@@ -25,17 +25,17 @@ class WPServerProtocol(protocol.Protocol):
         if globals.DEBUG:
             print("Connections: {}".format(self.factory.numConnections))
 
-class WPServerFactory(Factory):
+class UOServerFactory(Factory):
     numConnections = 0
 
     def __init__(self):
         print("UoPY Emu v0.0.1a")
-        print("PORT: {}".format(wpConfig.ReadServers()[0]["port"]))
+        print("PORT: {}".format(uoConfig.ReadServers()[0]["port"]))
 
     def buildProtocol(self, addr):
-        return WPServerProtocol(self)
+        return UOServerProtocol(self)
 
 
 def runserver():
-    reactor.listenTCP(wpConfig.ReadServers()[0]["port"], WPServerFactory())
+    reactor.listenTCP(uoConfig.ReadServers()[0]["port"], UOServerFactory())
     reactor.run()

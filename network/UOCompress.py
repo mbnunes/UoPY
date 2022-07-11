@@ -1,5 +1,5 @@
 
-class WPCompression:
+class UOCompression:
 
     def __init__(self):
         self.huffmanTable = [(2,0),(5,31),(6,34),(7,52),(7,117),(6,40),(6,59),(7,50),(8,224),(8,98),(7,86),(8,121),

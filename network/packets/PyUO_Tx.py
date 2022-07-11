@@ -1,6 +1,6 @@
 from network.UOPacket import UOPacket
 from config.uopy import UoPYConfig
-from network.WPCompress import WPCompression
+from network.UOCompress import UOCompression
 
 
 class Packet_8C(UOPacket):
@@ -127,7 +127,7 @@ class Packet_A9(UOPacket):
 
         self.packetBytes = self.getSizePacket(self.packetBytes)
 
-        self.compressed = WPCompression()
+        self.compressed = UOCompression()
         self.testpacket = self.compressed.compress(self.packetBytes)
 
         self.client.write(self.testpacket)
@@ -177,7 +177,7 @@ class Packet_B9(UOPacket):
             return False
 
         self.setInt32(self.flags)
-        self.compressed = WPCompression()
+        self.compressed = UOCompression()
         self.packetCompressed = self.compressed.compress(self.packetBytes)
         self.client.write(self.packetCompressed)
 

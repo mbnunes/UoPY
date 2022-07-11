@@ -51,7 +51,10 @@ class UOPacket:
         self.packetBytes += number.to_bytes(1, "little")
 
     def getIPAddress(self, packet, offset):
-        return "{}.{}.{}.{}".format(packet[offset],packet[offset+1],packet[offset+2],packet[offset+3])
+        if len(packet) > 1:
+            return "{}.{}.{}.{}".format(packet[offset],packet[offset+1],packet[offset+2],packet[offset+3])
+        else:
+            return None
 
     def getUTF8(self, packet, offset, lenght):
         return str(packet[offset:offset+lenght],"utf-8").replace('\x00',"")
